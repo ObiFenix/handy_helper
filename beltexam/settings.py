@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5$%6rej1%^b0plhu$y020g5k+tc5wz-p0!ojd513az8p)mtu^8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['obifenix.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost']
+#ALLOWED_HOSTS = ['obifenix.pythonanywhere.com','localhost']
 
 
 # Application definition
@@ -56,7 +58,7 @@ ROOT_URLCONF = 'beltexam.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['./handyhelper/templates'],
+        'DIRS': ['./templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
