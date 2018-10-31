@@ -1,0 +1,73 @@
+<!--
+Objectives:
+=====================================================
+<>  Shall pass information from route to the template
+<>  Shall display date passed from the route to template files
+==============================================================-->
+
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Registration Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Required CSS Files -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Comfortaa|Fredoka+One|Krub|Montserrat|Open+Sans|Poiret+One|Poppins|Raleway">
+        <link rel="stylesheet" href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" >
+        <link rel="stylesheet" href="{% static 'handyhelper/css/w3schools.css' %}">
+        <link rel="stylesheet" href="{% static 'fontawesome-free-5.1.0-web/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'handyhelper/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'account/css/main.css' %}">
+
+        <!-- Required Javascript and Bootstrap JS Files -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+    </head>
+
+    <body>
+        <!-- Header container -->
+        <header>
+            {% if request.session.uid %}
+            <div class="left-nav">
+                <a href="/handyhelper"><h2><span>Handy</span>Helper</h2></a>
+            </div>
+
+            <h4 style="color:darkslategray;">
+                <span>
+                    <img
+                    src="{% static 'handyhelper/imgs/user.png' %}"
+                    style="border: 1px solid #333; border-radius: 5rem; width: 20px; height: 20px;" alt="">
+                </span> {{ request.session.first_name }}
+            </h4>
+
+            <div class="right-nav">
+                <a id="nav-quotes" href="/">Home</a>
+                <a id="nav-booktrip" href="/handyhelper/addJob">Add A Job</a>
+                <a id="nav-logout" href="/logout">Logout</a>
+            </div>
+
+            {% else %}
+            <div class="left-nav">
+                <a href="/handyhelper"><h2><span>Handy</span>Helper</h2></a>
+            </div>
+            {% endif %}
+        </header>
+
+        <!-- Required Templates -->
+        {% block content %}{% endblock %}
+
+    </body>
+
+    <footer>
+        <div class="page-footer middle-nav"><a href="/handyhelper"><img src="{% static 'handyhelper/imgs/codingdojo.png' %}"></a></div>
+    </footer>
+
+</html>

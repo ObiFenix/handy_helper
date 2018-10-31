@@ -1,0 +1,88 @@
+{% extends "LoginRegister.html" %}
+{% block form %}
+
+   <form action="/register/user/" method="POST" class="form-group">
+      {% csrf_token %}
+      <div class="input-group">
+         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+         <input
+            id="first_name"
+            name="first_name"
+            type="text"
+            class="form-control"
+            placeholder="Enter First Name"
+            value="Martin">
+      </div>
+      {% if messages %} {% for message in messages %}
+      {% if message.tags == 'first_name error' %}
+      <p class="error" style="color:#4fbae0">{{ message }}</p>
+      {% endif %} {% endfor %} {% endif %}
+
+      <div class="input-group">
+         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+         <input
+           id="last_name"
+           name="last_name"
+           type="text"
+           class="form-control"
+           placeholder="Enter Last Name"
+           value="Nguema">
+      </div>
+      {% if messages %} {% for message in messages %}
+      {% if message.tags == 'last_name error' %}
+      <p class="error" style="color:#4fbae0">{{ message }}</p>
+      {% endif %} {% endfor %} {% endif %}
+
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+      <input
+        id="email"
+        name="email"
+        type="text"
+        class="form-control"
+        placeholder="Enter Your Email"
+        value="martin.nguema@superstar.com">
+      </div>
+      {% if messages %} {% for message in messages %}
+      {% if message.tags == 'email error' %} <p class="error" style="color:#4fbae0">{{ message }}</p> {% endif %}
+      {% endfor %} {% endif %}
+
+      <div class="input-group">
+         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+         <input
+           id="password"
+           type="password"
+           class="form-control"
+           name="password"
+           placeholder="Enter Your Password"
+           value="12345678">
+      </div>
+      {% if messages %} {% for message in messages %}
+      {% if message.tags == 'password error' %} <p class="error" style="color:#4fbae0">{{ message }}</p> {% endif %}
+      {% endfor %} {% endif %}
+      <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-eye-open"></i></span>
+      <input
+        id="confirm_pw"
+        name="confirm_pw"
+        type="password"
+        class="form-control"
+        placeholder="Confirm Password"
+        value="12345678">
+      </div>
+      {% if messages %} {% for message in messages %}
+      {% if message.tags == 'confirm_pw error' %}
+      <p class="error" style="color:#4fbae0">{{ message }}</p>
+      {% endif %} {% endfor %} {% endif %}
+
+      <div class="input submit">
+         <input
+           type="submit"
+           name="Create"
+           value="Register"
+           placeholder="submit"
+           class="register-btn">
+      </div>
+   </form>
+
+{% endblock %}

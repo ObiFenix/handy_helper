@@ -1,0 +1,78 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container" style="max-width: 700px;">
+
+    <div class="row">
+        <h1 class="mg-down">Add A Job</h1>
+    </div>
+
+    <div class="card" style="padding:4rem 0rem; height: 67.6vh !important;">
+        <form action="add/" method="POST" class="form-group">
+            {% csrf_token %}
+
+            <!-- <div class="form-group inline"> -->
+            <label class="control-label">Title:</label>
+            <input
+                id="title"
+                name="title"
+                type="text"
+                class="form-control"
+                placeholder="Enter job title here...">
+            <div>
+                {% if messages %} {% for message in messages %} {% if 'emptyfield' in message.tags %}
+                <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Required field:</strong> {{ message }}
+                </div>
+                {% endif %} {% endfor %} {% endif %}
+            </div>
+
+            <label class="control-label">Description:</label>
+            <textarea
+                id="description"
+                name="description"
+                type="text"
+                class="form-control"
+                placeholder="Enter job description here..."
+                rows=6>
+            </textarea>
+            <div>
+                {% if messages %} {% for message in messages %} {% if 'isemptyfield' in message.tags %}
+                <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Required field:</strong> {{ message }}
+                </div>
+                {% endif %} {% endfor %} {% endif %}
+            </div>
+
+            <label class="control-label">Location:</label>
+            <input
+                id="location"
+                name="location"
+                type="text"
+                class="form-control"
+                placeholder="Enter job location here...">
+            <div>
+                {% if messages %} {% for message in messages %} {% if 'emptyfield' in message.tags %}
+                <div class="alert alert-danger alert-dismissable fade in">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>Required field:</strong> {{ message }}
+                </div>
+                {% endif %} {% endfor %} {% endif %}
+            </div>
+
+            <!-- </div> -->
+            <div class="form-group flexed-end">
+                {% load static %}
+                <a href="/handyhelper" class="btn cancel">Cancel</a>
+                <input
+                    id="add"
+                    name="add"
+                    value="Submit"
+                    type="submit"
+                    class="btn cancel">
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

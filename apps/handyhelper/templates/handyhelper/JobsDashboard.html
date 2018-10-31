@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container-fluid" style="padding:2rem 4rem;">
+  <div class="row" style="margin-top: 2rem; height: 70vh;">
+      <div class="col-sm-8">
+         <!--Table-->
+         <h3 class="text-muted">Available Jobs Posted</h3>
+         <table class="table table-bordered">
+             <thead>
+                 <tr>
+                     <th>Job</th>
+                     <th>Location</th>
+                     <th>Action</th>
+                 </tr>
+             </thead>
+             <tbody>
+                {% if jobs %} {% for job in jobs %}
+                 <tr>
+                     <td>{{ job.title }}</td>
+                     <td>{{ job.location }}</td>
+                     {% if job.creator.id == request.session.uid  %}
+                     <td><a href="/handyhelper/viewJobplans/{{job.id}}" style="margin-right:.5rem">View</a> | <a style="margin:0 .5rem" href="/handyhelper/add/{{job.id}}">Add</a> | <a style="margin:0 .5rem" href="/handyhelper/editJob/{{job.id}}">Edit</a> | <a style="margin-left:.5rem" href="/handyhelper/delete/{{job.id}}">Delete</a></td>
+                     {% else %}
+                     <td><a href="/handyhelper/viewJobplans/{{job.id}}" style="margin-right:.5rem;">View</a> | <a style="margin-left:.5rem" href="/handyhelper/add/{{job.id}}">Add</a></td>
+                     {% endif %}
+                 </tr>
+                 {% endfor %} {% endif %}
+             </tbody>
+         </table>
+      </div>
+      <div class="col-sm-4">
+        <h3 class="text-muted">My Jobs</h3>
+         <table class="table table-bordered">
+             <thead>
+                <tr>
+                    <th>Job</th>
+                    <th>Actions</th>
+                </tr>
+             </thead>
+
+             <tbody>
+                {% if myjobs %} {% for job in myjobs %}
+                <tr>
+                    <td>{{ job.title }}</td>
+                    {% if job.creator.id == request.session.uid  %}
+                    <td><a style="margin-right:.5rem" href="/handyhelper/viewJobplans/{{job.id}}">View</a> | <a style="margin:0 .5rem" href="/handyhelper/editJob/{{job.id}}">Edit</a> | <a style="margin-left:.5rem" href="/handyhelper/cancel/{{job.id}}">Cancel</a></td>
+                    {% else %}
+                    <td><a style="margin-right:.5rem" href="/handyhelper/viewJobplans/{{job.id}}">View</a> | <a style="margin-left:.5rem" href="/handyhelper/cancel/{{job.id}}">Cancel</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %} {% endif %}
+             </tbody>
+         </table>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

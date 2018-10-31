@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+
+  <div id="wrapper">
+
+    <!-- Main container -->
+    <div class="responsive boxed" style="width:567px !important; padding: 1rem;">
+
+      <!-- Error message section -->
+      <div class="errors">
+        {% if messages %} {% for message in messages %} {% if 'logout' in message.tags %}
+        <div class="alert alert-info alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Happy Traveling:</strong> {{ message }}
+        </div>
+        {% endif %} {% if 'login' in message.tags %}
+        <div class="alert alert-info alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Request Denied:</strong> {{ message }}
+        </div>
+        {% endif %} {% if message.tags == 'dontExist error' %}
+        <div class="alert alert-danger alert-dismissable fade in">
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+          <strong>Request Denied:</strong> {{ message }}
+        </div>
+        {% endif %} {% endfor %} {% endif %}
+      </div>
+
+       <div class "headline text-align-center"><h1>{{ request.session.status }}</h1></div>
+
+       <div class="main-container responsive">
+          <div class="col-md-12">
+
+             {% block form %}{% endblock %}
+
+             <div class="registration-form">
+                {% load static %}
+                {% if request.session.status == 'Login' %}
+                <p class="text-muted" style="margin: 0rem">Forgot your password?</p><br>
+                <div>Don't have an account yet?<a class="log_a_tag" href="/register">Create Account</a></div>
+
+                {% elif request.session.status == 'Register' %}
+                <!-- <p style="color:#000; margin: 0rem">Forgot your password?</p><br> -->
+                <div>Already have an account?<a class="log_a_tag" href="/login">Login</a></div>
+
+                {% elif request.session.status == 'Edit My Account' %}
+                <span style="color:#a9a5a5">Do you really want to dit your account?</span><br>
+                <div class="row">
+                   <p class="col-xs-8">If not, press cancell to return to homepage.</p>
+                   <p><a class="edit col-sx-4" href="/quotes">Cancel</a></p>
+                </div>
+                {% else %}
+                <span></span>
+                {% endif %}
+             </div>
+          </div>
+       </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+
+	<!-- First Section -->
+	<div class="row justify-content-center">
+		{% if alljobs %}
+		<div class="row"><h1><span style="color:white;">{{created_by.first_name}} {{created_by.last_name}}'s </span>JobList</h1></div>
+		{% else %}
+		<div class="row"><h1><span style="color:white;">{{created_by.first_name}} {{created_by.last_name}} Has No </span>JobList</h1></div>
+		{% endif %}
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-sm-3"></div>
+
+		<div class="col-sm-6 scrolly">
+			<div class="wrapper-card">
+				{% for job in alljobs %}
+				<p class="col-sm-12 mb-2">
+					<div class="container col-sm-12 quote-container">
+						<div class="panel-body row">
+							<div class="row">
+								{% load static %}
+								<div class="col-xs-2"><img id="logo" src="{% static 'handyhelper/imgs/Glacial_Phoenixlogo_square.png' %}"></div>
+								<div class="col-xs-10">
+									<div class="row">
+										<p id="title" class="text-red"><span style="color:#fff">Posted on </span>{{job.created_at}}</p>
+									</div>
+									<h6 class="row heading">Posted by:
+										<span class="spanny">
+											<a href="/handyhelper/user/{{job.creator.id}}">{{job.creator.first_name}} {{job.creator.last_name}}</a>
+										</span>
+									</h6>
+								</div>
+							</div>
+							<div class="row body-card col-xs-10">
+								<p>
+									<h5><strong class="text-muted">Description: </strong> {{ job.desc }} </h5>
+								</p>
+							</div>
+						</div>
+					</div>
+				</p>
+				{% endfor %}
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
